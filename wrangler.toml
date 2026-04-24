@@ -1,0 +1,17 @@
+name = "nebularnews-admin"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_date = "2025-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# The Workers API URL is read from process.env.PUBLIC_API_BASE_URL at runtime.
+# DEV_BYPASS_ENABLED is deliberately NOT set here — dev bypass is local-only.
+[vars]
+PUBLIC_API_BASE_URL = "https://api.nebularnews.com"
+PUBLIC_WEB_BASE_URL = "https://admin.nebularnews.com"
+
+# Preview/dev-adjacent env: kept separate from production so dev bypass can be
+# enabled on a staging subdomain without ever landing on prod.
+[env.preview.vars]
+PUBLIC_API_BASE_URL = "https://api.nebularnews.com"
+PUBLIC_WEB_BASE_URL = "https://admin-preview.nebularnews.com"
+DEV_BYPASS_ENABLED = "true"

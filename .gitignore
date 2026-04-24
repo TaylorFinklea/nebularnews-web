@@ -1,0 +1,17 @@
+node_modules
+.DS_Store
+.env
+.env.*
+!.env.example
+.svelte-kit
+.vercel
+.wrangler
+build
+dist
+.pnpm-store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.vite
