@@ -13,18 +13,9 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
   const apiBase = publicEnv.PUBLIC_API_BASE_URL ?? DEFAULT_API;
   const webBase = publicEnv.PUBLIC_WEB_BASE_URL ?? url.origin;
-  const callback = `${webBase}/sign-in/callback`;
-  const handoff = `${apiBase}/api/auth/web-handoff?target=${encodeURIComponent(callback)}`;
-
-  // The better-auth URL that kicks off the Apple OAuth flow. Stashed as
-  // `appleSignInUrl` so the page template can drop it into an <a href>.
-  const appleSignInUrl =
-    `${apiBase}/api/auth/sign-in/social?provider=apple` +
-    `&callbackURL=${encodeURIComponent(handoff)}` +
-    `&errorCallbackURL=${encodeURIComponent(`${webBase}/sign-in?error=apple`)}`;
-
   return {
-    appleSignInUrl,
+    apiBase,
+    webBase,
     devBypassEnabled: privateEnv.DEV_BYPASS_ENABLED === 'true',
     error: url.searchParams.get('error'),
   };
