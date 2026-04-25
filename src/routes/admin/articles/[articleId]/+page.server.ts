@@ -1,19 +1,21 @@
-import { fail } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { api, ApiError } from '$lib/api/client';
-import type { AdminArticleDetail, AdminArticlesPage } from '$lib/api/types';
+import type { AdminArticleDetail } from '$lib/api/types';
 
 export const load: PageServerLoad = async ({ locals, fetch, params }) => {
-  // There's no GET /admin/articles/:id yet, so fall back to pulling the
-  // paginated list with a 1-item filter on id — not ideal but avoids adding
-  // another endpoint for now.
-  const page = await api.get<AdminArticlesPage>('/admin/articles', {
-    sessionToken: locals.sessionToken,
-    fetch,
-    query: { limit: 200 },
-  });
-  const meta = page.articles.find((a) => a.id === params.articleId) ?? null;
-  return { articleId: params.articleId, meta };
+  try {
+    const article = await api.get<AdminArticleDetail>(
+      `/admin/articles/${params.articleId}`,
+      { sessionToken: locals.sessionToken, fetch },
+    );
+    return { article };
+  } catch (err: unknown) {
+    if (err instanceof ApiError && err.status === 404) {
+      throw error(404, 'Article not found');
+    }
+    throw err;
+  }
 };
 
 export const actions: Actions = {

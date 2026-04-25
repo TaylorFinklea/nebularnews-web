@@ -80,6 +80,7 @@ export interface AdminArticleDetail extends AdminArticle {
   extraction_method: string | null;
   extraction_quality: number | null;
   last_fetch_attempt_at: number | null;
+  feed_scrape_mode: string | null;
 }
 
 export interface AdminArticlesPage {
