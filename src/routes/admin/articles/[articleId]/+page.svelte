@@ -59,6 +59,12 @@
 
     <div class="rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4">
       <h2 class="text-sm font-semibold">Actions</h2>
+      {#if a.quarantined_at}
+        <div class="mt-3 rounded-md border border-[color:var(--color-warning-soft)] bg-[color:var(--color-warning-soft)] p-3 text-xs text-[color:var(--color-warning)]">
+          <p class="font-medium">Quarantined</p>
+          <p class="mt-1">Hidden from user feeds since {new Date(a.quarantined_at).toLocaleString()}. Permanent extraction failure or retries exhausted.</p>
+        </div>
+      {/if}
       <form method="POST" action="?/rescrape" class="mt-3">
         <button
           type="submit"
@@ -67,8 +73,20 @@
           Rescrape now
         </button>
       </form>
+      {#if a.quarantined_at}
+        <form method="POST" action="?/unquarantine" class="mt-2">
+          <button
+            type="submit"
+            class="rounded-md border border-[color:var(--color-border)] px-3 py-1.5 text-sm font-medium text-[color:var(--color-fg)]"
+          >
+            Unquarantine
+          </button>
+        </form>
+      {/if}
       {#if form?.error}
         <p class="mt-3 text-xs text-[color:var(--color-danger)]">{form.error}</p>
+      {:else if form?.unquarantined}
+        <p class="mt-3 text-xs text-[color:var(--color-success)]">Unquarantined. Article is back in feeds.</p>
       {:else if form?.ok}
         <p class="mt-3 text-xs text-[color:var(--color-success)]">
           Rescraped.

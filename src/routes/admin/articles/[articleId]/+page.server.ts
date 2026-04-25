@@ -39,4 +39,17 @@ export const actions: Actions = {
       return fail(400, { error: msg });
     }
   },
+  unquarantine: async ({ locals, fetch, params }) => {
+    try {
+      await api.post<AdminArticleDetail>(
+        `/admin/articles/${params.articleId}/unquarantine`,
+        {},
+        { sessionToken: locals.sessionToken, fetch },
+      );
+      return { unquarantined: true };
+    } catch (err: unknown) {
+      const msg = err instanceof ApiError ? err.message : 'Unquarantine failed';
+      return fail(400, { error: msg });
+    }
+  },
 };

@@ -68,6 +68,7 @@ export interface AdminArticle {
   scrape_retry_count: number;
   next_scrape_attempt_at: number | null;
   fetch_attempt_count: number;
+  quarantined_at: number | null;
   feed_id: string | null;
   feed_title: string | null;
 }
@@ -81,6 +82,7 @@ export interface AdminArticleDetail extends AdminArticle {
   extraction_quality: number | null;
   last_fetch_attempt_at: number | null;
   feed_scrape_mode: string | null;
+  quarantined_at: number | null;
 }
 
 export interface AdminArticlesPage {
