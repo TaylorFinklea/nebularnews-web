@@ -23,6 +23,8 @@ export interface ApiErrorEnvelope {
 export interface AdminMe {
   is_admin: boolean;
   user_id?: string;
+  email?: string | null;
+  name?: string | null;
 }
 
 export interface AdminUser {

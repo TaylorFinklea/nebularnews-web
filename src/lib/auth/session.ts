@@ -6,7 +6,12 @@ export const SESSION_COOKIE = 'nn_session';
 
 export interface ResolvedSession {
   sessionToken: string;
-  user: { userId: string; isAdmin: boolean };
+  user: {
+    userId: string;
+    isAdmin: boolean;
+    email: string | null;
+    name: string | null;
+  };
 }
 
 export function readSessionCookie(cookies: Cookies): string | null {
@@ -47,7 +52,12 @@ export async function resolveSession(
     });
     return {
       sessionToken,
-      user: { userId: me.user_id ?? '', isAdmin: me.is_admin === true },
+      user: {
+        userId: me.user_id ?? '',
+        isAdmin: me.is_admin === true,
+        email: me.email ?? null,
+        name: me.name ?? null,
+      },
     };
   } catch (err: unknown) {
     if (err instanceof ApiError && (err.status === 401 || err.status === 403)) {

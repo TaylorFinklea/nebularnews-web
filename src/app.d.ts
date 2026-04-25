@@ -10,6 +10,8 @@ declare global {
       user: {
         userId: string;
         isAdmin: boolean;
+        email: string | null;
+        name: string | null;
       } | null;
     }
     interface PageData {

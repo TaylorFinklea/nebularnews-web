@@ -45,7 +45,10 @@
   <div class="flex-1 overflow-x-hidden">
     <header class="flex items-center justify-between border-b border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-6 py-3">
       <div class="text-sm text-[color:var(--color-muted)]">
-        Signed in as <span class="font-mono">{data.user.userId}</span>
+        Signed in as
+        <span class="font-medium text-[color:var(--color-ink)]">
+          {data.user.email ?? data.user.name ?? data.user.userId}
+        </span>
       </div>
       <form method="POST" action="/admin/sign-out">
         <button
