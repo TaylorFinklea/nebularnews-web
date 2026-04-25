@@ -64,7 +64,7 @@
                   </a>
                 </td>
                 <td class="px-4 py-2 text-[color:var(--color-muted)]">{row.feed_title ?? '—'}</td>
-                <td class="px-4 py-2 font-mono text-xs text-red-700">{row.error}</td>
+                <td class="px-4 py-2 font-mono text-xs text-[color:var(--color-danger)]">{row.error}</td>
                 <td class="px-4 py-2 text-xs text-[color:var(--color-muted)]">
                   {new Date(row.attempted_at).toLocaleString()}
                 </td>

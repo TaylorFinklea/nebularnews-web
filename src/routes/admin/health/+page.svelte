@@ -95,7 +95,7 @@
                 </a>
               </td>
               <td class="px-4 py-2 text-xs text-[color:var(--color-muted)]">{e.feed_title ?? '—'}</td>
-              <td class="px-4 py-2 font-mono text-xs text-red-700">{e.error}</td>
+              <td class="px-4 py-2 font-mono text-xs text-[color:var(--color-danger)]">{e.error}</td>
               <td class="px-4 py-2 text-xs text-[color:var(--color-muted)]">
                 {new Date(e.attempted_at).toLocaleString()}
               </td>

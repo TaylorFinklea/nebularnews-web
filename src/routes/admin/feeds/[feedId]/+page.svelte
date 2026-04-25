@@ -7,7 +7,7 @@
   <a href="/admin/feeds" class="text-sm text-[color:var(--color-muted)] underline">← All feeds</a>
 
   {#if !data.feed}
-    <p class="mt-4 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-800">
+    <p class="mt-4 rounded-md border border-[color:var(--color-danger-border)] bg-[color:var(--color-danger-soft)] p-3 text-sm text-[color:var(--color-danger)]">
       Feed not found.
     </p>
   {:else}
@@ -23,7 +23,7 @@
             <span class="font-medium uppercase tracking-wide text-[color:var(--color-muted)]">Scrape mode</span>
             <select
               name="scrape_mode"
-              class="mt-1 rounded-md border border-[color:var(--color-border)] bg-white px-2 py-1.5 text-sm"
+              class="mt-1 rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-2 py-1.5 text-sm"
               value={data.feed.scrape_mode}
             >
               <option value="rss_only">rss_only</option>
@@ -45,9 +45,9 @@
           </button>
 
           {#if form?.error}
-            <p class="text-xs text-red-700">{form.error}</p>
+            <p class="text-xs text-[color:var(--color-danger)]">{form.error}</p>
           {:else if form?.ok}
-            <p class="text-xs text-emerald-700">Saved.</p>
+            <p class="text-xs text-[color:var(--color-success)]">Saved.</p>
           {/if}
         </form>
       </div>
@@ -99,7 +99,7 @@
                   {a.content_text_length} chars
                 </td>
                 <td class="px-4 py-2 text-right">{a.scrape_retry_count}</td>
-                <td class="px-4 py-2 font-mono text-xs text-red-700">
+                <td class="px-4 py-2 font-mono text-xs text-[color:var(--color-danger)]">
                   {a.last_fetch_error ?? ''}
                 </td>
               </tr>

@@ -1,12 +1,44 @@
 @import "tailwindcss";
 
+/*
+ * Tokyo Night palette (the original "night" variant — darker than Storm).
+ * Single dark theme for now; once design mockups land we'll add a real
+ * theme system. The tokens below are split into structure (bg, surface,
+ * border, ink, muted, accent) and status (success, warning, danger) so
+ * components don't reach for `text-red-700` / `bg-red-50` directly — they
+ * use semantic tokens instead.
+ */
 @theme {
-  --color-bg: oklch(0.98 0 0);
-  --color-surface: oklch(1 0 0);
-  --color-border: oklch(0.92 0 0);
-  --color-muted: oklch(0.5 0 0);
-  --color-ink: oklch(0.2 0 0);
-  --color-accent: oklch(0.55 0.18 260);
+  /* Structure */
+  --color-bg: #1a1b26;
+  --color-surface: #24283b;
+  --color-surface-elev: #2f334d;
+  --color-border: #2a2f45;
+  --color-border-strong: #414868;
+  --color-muted: #7a85b1;
+  --color-ink: #c0caf5;
+  --color-ink-bright: #ffffff;
+
+  /* Accent */
+  --color-accent: #7aa2f7;
+  --color-accent-soft: rgba(122, 162, 247, 0.18);
+
+  /* Status */
+  --color-success: #9ece6a;
+  --color-success-soft: rgba(158, 206, 106, 0.16);
+  --color-warning: #e0af68;
+  --color-warning-soft: rgba(224, 175, 104, 0.16);
+  --color-danger: #f7768e;
+  --color-danger-soft: rgba(247, 118, 142, 0.14);
+  --color-danger-border: rgba(247, 118, 142, 0.4);
+
+  /* Brand-on-dark */
+  --color-cyan: #7dcfff;
+  --color-purple: #bb9af7;
+}
+
+html {
+  color-scheme: dark;
 }
 
 html, body {
@@ -16,4 +48,28 @@ html, body {
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.surface { background: var(--color-surface); border: 1px solid var(--color-border); }
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink-bright);
+}
+
+a { color: inherit; }
+
+/* Inputs and selects need explicit dark styling — Tailwind's reset doesn't
+ * theme them on its own, and OS-default form controls look out of place
+ * against a dark surface. */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+select,
+textarea {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border-strong);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 1px solid var(--color-accent);
+  outline-offset: -1px;
+}

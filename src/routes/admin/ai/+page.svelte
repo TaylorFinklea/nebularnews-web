@@ -83,10 +83,10 @@
             <tr class="border-t border-[color:var(--color-border)]">
               <td class="px-4 py-2 font-mono text-xs">{t.name}</td>
               <td class="px-4 py-2 text-right">{t.count}</td>
-              <td class="px-4 py-2 text-right text-emerald-700">{t.succeeded}</td>
-              <td class="px-4 py-2 text-right" class:text-red-700={t.failed > 0}>{t.failed}</td>
-              <td class="px-4 py-2 text-right" class:text-red-700={t.thrown_errors > 0}>{t.thrown_errors}</td>
-              <td class="px-4 py-2 text-right text-xs" class:text-amber-700={t.logging_gap > 0}>{t.logging_gap}</td>
+              <td class="px-4 py-2 text-right text-[color:var(--color-success)]">{t.succeeded}</td>
+              <td class="px-4 py-2 text-right" class:text-[color:var(--color-danger)]={t.failed > 0}>{t.failed}</td>
+              <td class="px-4 py-2 text-right" class:text-[color:var(--color-danger)]={t.thrown_errors > 0}>{t.thrown_errors}</td>
+              <td class="px-4 py-2 text-right text-xs" class:text-[color:var(--color-warning)]={t.logging_gap > 0}>{t.logging_gap}</td>
               <td class="px-4 py-2 text-right text-xs">
                 {t.success_rate !== null ? (t.success_rate * 100).toFixed(0) + '%' : '—'}
               </td>

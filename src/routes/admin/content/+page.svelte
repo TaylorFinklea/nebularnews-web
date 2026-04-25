@@ -29,7 +29,7 @@
             <span>· {a.scrape_retry_count} retries</span>
           {/if}
           {#if a.last_fetch_error}
-            <span class="text-red-700">· error</span>
+            <span class="text-[color:var(--color-danger)]">· error</span>
           {/if}
         </div>
       </a>

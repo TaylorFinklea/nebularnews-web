@@ -7,7 +7,7 @@
   <a href="/admin/articles" class="text-sm text-[color:var(--color-muted)] underline">← All articles</a>
 
   {#if !data.meta}
-    <p class="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-800">
+    <p class="mt-4 rounded-md border border-[color:var(--color-warning-soft)] bg-[color:var(--color-warning-soft)] p-3 text-sm text-[color:var(--color-warning)]">
       Article metadata not in recent list (id: <span class="font-mono">{data.articleId}</span>).
       Rescrape still works.
     </p>
@@ -41,7 +41,7 @@
           </dd>
         </dl>
         {#if data.meta.last_fetch_error}
-          <pre class="mt-3 whitespace-pre-wrap rounded bg-red-50 p-2 font-mono text-xs text-red-700">{data.meta.last_fetch_error}</pre>
+          <pre class="mt-3 whitespace-pre-wrap rounded bg-[color:var(--color-danger-soft)] p-2 font-mono text-xs text-[color:var(--color-danger)]">{data.meta.last_fetch_error}</pre>
         {/if}
       </div>
 
@@ -56,9 +56,9 @@
           </button>
         </form>
         {#if form?.error}
-          <p class="mt-3 text-xs text-red-700">{form.error}</p>
+          <p class="mt-3 text-xs text-[color:var(--color-danger)]">{form.error}</p>
         {:else if form?.ok}
-          <p class="mt-3 text-xs text-emerald-700">
+          <p class="mt-3 text-xs text-[color:var(--color-success)]">
             Rescraped.
             {#if form.updated}
               {form.updated.word_count ?? 0} words · {form.updated.extraction_method}

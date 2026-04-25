@@ -60,7 +60,7 @@
             <td class="px-4 py-2 text-xs text-[color:var(--color-muted)]">
               {a.next_scrape_attempt_at ? new Date(a.next_scrape_attempt_at).toLocaleString() : '—'}
             </td>
-            <td class="px-4 py-2 font-mono text-xs text-red-700">{a.last_fetch_error ?? ''}</td>
+            <td class="px-4 py-2 font-mono text-xs text-[color:var(--color-danger)]">{a.last_fetch_error ?? ''}</td>
           </tr>
         {/each}
         {#if data.page.articles.length === 0}

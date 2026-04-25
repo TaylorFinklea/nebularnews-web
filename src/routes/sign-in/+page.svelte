@@ -55,7 +55,7 @@
   </header>
 
   {#if data.error === 'apple'}
-    <p class="rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-800">
+    <p class="rounded-md border border-[color:var(--color-danger-border)] bg-[color:var(--color-danger-soft)] p-3 text-sm text-[color:var(--color-danger)]">
       Apple Sign In failed. Check the Workers logs for details.
     </p>
   {/if}
@@ -69,7 +69,7 @@
     {signingIn ? 'Redirecting…' : 'Sign in with Apple'}
   </button>
   {#if appleError}
-    <p class="rounded-md border border-red-300 bg-red-50 p-3 text-xs text-red-800">{appleError}</p>
+    <p class="rounded-md border border-[color:var(--color-danger-border)] bg-[color:var(--color-danger-soft)] p-3 text-xs text-[color:var(--color-danger)]">{appleError}</p>
   {/if}
 
   {#if data.devBypassEnabled}
@@ -92,7 +92,7 @@
           class="rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 font-mono text-sm"
         />
         {#if form?.error}
-          <p class="text-xs text-red-700">{form.error}</p>
+          <p class="text-xs text-[color:var(--color-danger)]">{form.error}</p>
         {/if}
         <button
           type="submit"

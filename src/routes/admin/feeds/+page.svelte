@@ -4,8 +4,8 @@
 
   const scrapeModeColor: Record<string, string> = {
     rss_only: 'text-[color:var(--color-muted)]',
-    auto_fetch_on_empty: 'text-emerald-700',
-    always: 'text-sky-700',
+    auto_fetch_on_empty: 'text-[color:var(--color-success)]',
+    always: 'text-[color:var(--color-cyan)]',
   };
 </script>
 
@@ -42,10 +42,10 @@
               {feed.scrape_mode}
             </td>
             <td class="px-4 py-2 text-right">{feed.subscriber_count}</td>
-            <td class="px-4 py-2 text-right" class:text-red-700={feed.error_count > 0}>
+            <td class="px-4 py-2 text-right" class:text-[color:var(--color-danger)]={feed.error_count > 0}>
               {feed.error_count}
             </td>
-            <td class="px-4 py-2 text-right" class:text-red-700={feed.scrape_error_count > 0}>
+            <td class="px-4 py-2 text-right" class:text-[color:var(--color-danger)]={feed.scrape_error_count > 0}>
               {feed.scrape_error_count}
             </td>
             <td class="px-4 py-2 text-right">

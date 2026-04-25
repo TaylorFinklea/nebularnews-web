@@ -7,7 +7,7 @@
   <a href="/admin/users" class="text-sm text-[color:var(--color-muted)] underline">← All users</a>
 
   {#if !data.user}
-    <p class="mt-4 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-800">User not found.</p>
+    <p class="mt-4 rounded-md border border-[color:var(--color-danger-border)] bg-[color:var(--color-danger-soft)] p-3 text-sm text-[color:var(--color-danger)]">User not found.</p>
   {:else}
     <h1 class="mt-3 text-2xl font-semibold">{data.user.name ?? data.user.email ?? data.user.id}</h1>
     <div class="text-xs text-[color:var(--color-muted)]">{data.user.email ?? '—'}</div>
@@ -49,7 +49,7 @@
           <form method="POST" action="?/triggerBrief" class="mt-3 flex gap-2">
             <select
               name="edition_kind"
-              class="rounded-md border border-[color:var(--color-border)] bg-white px-2 py-1.5 text-sm"
+              class="rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-2 py-1.5 text-sm"
             >
               <option value="morning">morning</option>
               <option value="evening">evening</option>
@@ -65,11 +65,11 @@
         </div>
 
         {#if form?.error}
-          <p class="rounded-md border border-red-300 bg-red-50 p-3 text-xs text-red-800">{form.error}</p>
+          <p class="rounded-md border border-[color:var(--color-danger-border)] bg-[color:var(--color-danger-soft)] p-3 text-xs text-[color:var(--color-danger)]">{form.error}</p>
         {:else if form?.ok && form.action === 'role'}
-          <p class="text-xs text-emerald-700">Role updated.</p>
+          <p class="text-xs text-[color:var(--color-success)]">Role updated.</p>
         {:else if form?.ok && form.action === 'brief'}
-          <p class="text-xs text-emerald-700">
+          <p class="text-xs text-[color:var(--color-success)]">
             Brief generated ({form.brief?.bullet_count ?? 0} bullets){form.brief?.duplicate ? ' — duplicate' : ''}.
           </p>
         {/if}
