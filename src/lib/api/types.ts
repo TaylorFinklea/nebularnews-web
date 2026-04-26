@@ -73,6 +73,22 @@ export interface AdminArticle {
   feed_title: string | null;
 }
 
+export interface AdminUsageDailyRow {
+  provider: string;          // 'steel' | 'browserless'
+  day_unix: number;
+  call_count: number;
+  success_count: number;
+  error_count: number;
+  total_duration_ms: number;
+  p50_duration_ms: number | null;
+  p95_duration_ms: number | null;
+}
+
+export interface AdminUsageResponse {
+  today: Record<string, AdminUsageDailyRow>;
+  daily: AdminUsageDailyRow[];
+}
+
 export interface AdminArticleDetail extends AdminArticle {
   content_html: string | null;
   content_text: string | null;
