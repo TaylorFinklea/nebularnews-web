@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { PageData } from './$types';
-  let { data }: { data: PageData } = $props();
+  import type { ActionData, PageData } from './$types';
+  let { data, form }: { data: PageData; form: ActionData } = $props();
 </script>
 
 <section class="mx-auto max-w-5xl">
@@ -12,6 +12,67 @@
   {#if data.userFilter}
     <a href="/admin/briefs" class="mt-2 inline-block text-sm underline">Clear filter</a>
   {/if}
+
+  <form
+    method="POST"
+    action="?/generatePush"
+    class="mt-6 rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4"
+  >
+    <h2 class="text-sm font-semibold">Generate + push (test NSE)</h2>
+    <p class="mt-1 text-xs text-[color:var(--color-muted)]">
+      Bypasses the timezone cron and sends a real APNs push so you can verify the Notification Service Extension end-to-end.
+    </p>
+    <div class="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3">
+      <label class="block text-xs">
+        <span class="block text-[color:var(--color-muted)]">User ID</span>
+        <input
+          type="text"
+          name="user_id"
+          required
+          value={data.userFilter ?? ''}
+          placeholder="WX0mN0RgggTcTvN5fTtdrhpyV2MML0n8"
+          class="mt-1 w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-2 py-1 font-mono text-xs"
+        />
+      </label>
+      <label class="block text-xs">
+        <span class="block text-[color:var(--color-muted)]">Edition</span>
+        <select
+          name="edition_kind"
+          class="mt-1 w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-2 py-1 text-xs"
+        >
+          <option value="ondemand" selected>On-demand</option>
+          <option value="morning">Morning</option>
+          <option value="evening">Evening</option>
+        </select>
+      </label>
+      <label class="block text-xs">
+        <span class="block text-[color:var(--color-muted)]">Lookback (hours)</span>
+        <input
+          type="number"
+          name="lookback_hours"
+          value="24"
+          min="1"
+          max="168"
+          class="mt-1 w-full rounded border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-2 py-1 text-xs"
+        />
+      </label>
+    </div>
+    <button
+      type="submit"
+      class="mt-3 rounded-md bg-[color:var(--color-accent)] px-3 py-1.5 text-sm font-medium text-white"
+    >
+      Generate + push
+    </button>
+    {#if form?.error}
+      <p class="mt-3 text-xs text-[color:var(--color-danger)]">{form.error}</p>
+    {:else if form?.generated}
+      <p class="mt-3 text-xs text-[color:var(--color-success)]">
+        Generated · {form.bullets} bullets · {form.candidates} candidates
+        {#if form.pushed} · push sent{:else} · push skipped{/if}
+        {#if form.duplicate} · duplicate edition slot, no row written{/if}
+      </p>
+    {/if}
+  </form>
 
   <div class="mt-6 overflow-hidden rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
     <table class="w-full text-sm">
