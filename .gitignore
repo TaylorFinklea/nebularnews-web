@@ -15,3 +15,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .vite
+
+# Secrets — defense in depth. Apple keys, GCP service accounts, etc.
+*.p8
+AuthKey_*.p8
+*.json.key
