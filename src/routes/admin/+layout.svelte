@@ -12,6 +12,7 @@
     { href: '/admin/ai', label: 'AI usage' },
     { href: '/admin/content', label: 'Content' },
     { href: '/admin/briefs', label: 'Briefs' },
+    { href: '/admin/fallback-images', label: 'Fallback images' },
     { href: '/admin/usage', label: 'API usage' },
     { href: '/admin/health', label: 'Health' },
   ];

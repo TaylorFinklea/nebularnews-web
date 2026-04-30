@@ -182,3 +182,27 @@ export interface AdminBriefsPage {
   briefs: AdminBriefRow[];
   next_before: number | null;
 }
+
+// ---------- Fallback images ----------
+
+export interface AdminFallbackImageSlot {
+  slot: number;
+  exists: boolean;
+  lastPrompt?: string;
+  lastProvider?: 'openai' | 'imagen3';
+  lastGeneratedAt?: number;
+}
+
+export interface AdminFallbackImagesPage {
+  slots: AdminFallbackImageSlot[];
+}
+
+export interface AdminFallbackGenerateResult {
+  previewId: string;
+  previewUrl: string;
+}
+
+export interface AdminFallbackCommitResult {
+  slot: number;
+  url: string;
+}
