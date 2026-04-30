@@ -14,6 +14,7 @@
     { href: '/admin/briefs', label: 'Briefs' },
     { href: '/admin/fallback-images', label: 'Fallback images' },
     { href: '/admin/usage', label: 'API usage' },
+    { href: '/admin/audit', label: 'Audit log' },
     { href: '/admin/health', label: 'Health' },
   ];
 

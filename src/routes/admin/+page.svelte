@@ -7,10 +7,18 @@
   const health = $derived(data.health);
   const scraping = $derived(data.scraping);
   const ai = $derived(data.ai);
+  const usage = $derived(data.usage);
+  const steelToday = $derived(usage?.today.steel);
+  const browserlessToday = $derived(usage?.today.browserless);
 
   function fmt(n: number | null | undefined): string {
     if (n === null || n === undefined) return '—';
     return n.toLocaleString();
+  }
+
+  function successPct(row: { call_count: number; success_count: number } | null | undefined): string {
+    if (!row || row.call_count === 0) return '—';
+    return Math.round((row.success_count / row.call_count) * 100) + '%';
   }
 </script>
 
@@ -40,6 +48,11 @@
     <StatCard label="AI tokens · week" value={fmt(ai?.weekly.tokens)} />
     <StatCard label="AI calls · day" value={fmt(ai?.daily.calls)} />
     <StatCard label="AI errors · 7d" value={fmt(ai?.possible_errors_7d)} />
+
+    <StatCard label="Steel calls · today" value={fmt(steelToday?.call_count ?? 0)} />
+    <StatCard label="Steel success · today" value={successPct(steelToday)} />
+    <StatCard label="Browserless calls · today" value={fmt(browserlessToday?.call_count ?? 0)} />
+    <StatCard label="Browserless success · today" value={successPct(browserlessToday)} />
   </div>
 
   {#if scraping?.recent_errors && scraping.recent_errors.length > 0}

@@ -89,6 +89,23 @@ export interface AdminUsageResponse {
   daily: AdminUsageDailyRow[];
 }
 
+export interface AdminAuditEntry {
+  id: string;
+  user_id: string;
+  method: string;
+  path: string;
+  params_json: string | null;
+  body_json: string | null;
+  status_code: number | null;
+  request_id: string | null;
+  created_at: number;
+}
+
+export interface AdminAuditPage {
+  entries: AdminAuditEntry[];
+  next_before: number | null;
+}
+
 export interface AdminArticleDetail extends AdminArticle {
   content_html: string | null;
   content_text: string | null;
