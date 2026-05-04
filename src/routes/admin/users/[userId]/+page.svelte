@@ -75,5 +75,78 @@
         {/if}
       </div>
     </div>
+
+    {#if data.snapshot}
+      {@const snap = data.snapshot}
+      <div class="mt-6 rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4">
+        <div class="flex items-baseline justify-between">
+          <h2 class="text-sm font-semibold">Scoring snapshot</h2>
+          <span class="text-xs text-[color:var(--color-muted)]">
+            {snap.score_totals.last_24h} scored · 24h · last
+            {snap.score_totals.last_score_at
+              ? new Date(snap.score_totals.last_score_at).toLocaleString()
+              : '—'}
+          </span>
+        </div>
+
+        <h3 class="mt-4 text-xs font-medium uppercase tracking-wide text-[color:var(--color-muted)]">Per-feed engagement</h3>
+        {#if snap.feed_engagement.length === 0}
+          <p class="mt-2 text-xs text-[color:var(--color-muted)]">No engagement recorded yet.</p>
+        {:else}
+          <div class="mt-2 overflow-x-auto">
+            <table class="w-full min-w-[600px] text-xs">
+              <thead class="text-left text-[color:var(--color-muted)]">
+                <tr>
+                  <th class="py-1 pr-3 font-medium">Feed</th>
+                  <th class="py-1 pr-3 font-medium">Reads</th>
+                  <th class="py-1 pr-3 font-medium">Saves</th>
+                  <th class="py-1 pr-3 font-medium">Dismisses</th>
+                  <th class="py-1 pr-3 font-medium">Avg depth</th>
+                  <th class="py-1 pr-3 font-medium">Avg time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each snap.feed_engagement as f (f.feed_id)}
+                  <tr class="border-t border-[color:var(--color-border)]">
+                    <td class="py-1 pr-3">{f.feed_title ?? f.feed_id}</td>
+                    <td class="py-1 pr-3 tabular-nums">{f.reads}</td>
+                    <td class="py-1 pr-3 tabular-nums">{f.saves}</td>
+                    <td class="py-1 pr-3 tabular-nums">{f.dismisses}</td>
+                    <td class="py-1 pr-3 tabular-nums">{f.avg_depth_percent != null ? `${f.avg_depth_percent}%` : '—'}</td>
+                    <td class="py-1 pr-3 tabular-nums">{f.avg_time_minutes != null ? `${f.avg_time_minutes} min` : '—'}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
+
+        <h3 class="mt-6 text-xs font-medium uppercase tracking-wide text-[color:var(--color-muted)]">
+          Recent scores ({snap.score_totals.last_7d} in last 7d)
+        </h3>
+        {#if snap.recent_scores.length === 0}
+          <p class="mt-2 text-xs text-[color:var(--color-muted)]">No scores yet.</p>
+        {:else}
+          <ul class="mt-2 divide-y divide-[color:var(--color-border)]">
+            {#each snap.recent_scores as s (s.article_id + s.created_at)}
+              <li class="flex items-baseline gap-3 py-1.5 text-xs">
+                <span
+                  class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full font-mono text-[10px]"
+                  class:bg-emerald-500={s.score >= 4}
+                  class:text-white={s.score >= 4 || s.score <= 2}
+                  class:bg-amber-500={s.score === 3}
+                  class:bg-rose-500={s.score <= 2}
+                >
+                  {s.score}
+                </span>
+                <span class="min-w-0 flex-1 truncate" title={s.article_title ?? ''}>{s.article_title ?? s.article_id}</span>
+                <span class="text-[color:var(--color-muted)]">{s.scoring_method}</span>
+                <span class="text-[color:var(--color-muted)]">{new Date(s.created_at).toLocaleString()}</span>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
+    {/if}
   {/if}
 </section>
